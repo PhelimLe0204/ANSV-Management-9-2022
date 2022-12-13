@@ -1,9 +1,15 @@
 package vn.ansv.management.dto;
 
 import java.sql.Date;
+import java.time.Duration;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeFormatterBuilder;
+import java.util.Locale;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Transient;
 
 @Entity
 public class ProjectDetailDto {
@@ -86,6 +92,77 @@ public class ProjectDetailDto {
     private Date created_at;
 
     public ProjectDetailDto() {
+    }
+
+    // calculated field = transient, not exist in MySql
+    @Transient
+    private long chenh_lech_DAC; // chenh_lech_DAC is calculated from "hop_dong_DAC", "muc_tieu_DAC" và
+                                 // "thuc_te_DAC"
+    @Transient
+    private long chenh_lech_PAC; // chenh_lech_PAC is calculated from "hop_dong_PAC", "muc_tieu_PAC" và
+                                 // "thuc_te_PAC"
+    @Transient
+    private long chenh_lech_FAC; // chenh_lech_FAC is calculated from "hop_dong_FAC", "muc_tieu_FAC" và
+                                 // "thuc_te_FAC"
+
+    public String tinh_ngay_chenh_lech(String date_hop_dong, String date_muc_tieu, String date_thuc_te) {
+        DateTimeFormatter dateFormatter = new DateTimeFormatterBuilder()
+                .parseCaseInsensitive()
+                .appendPattern("dd/MM/uuuu")
+                .toFormatter(Locale.ENGLISH);
+        String result = null;
+
+        if (date_hop_dong == null && date_muc_tieu == null) {
+            return result;
+        }
+
+        LocalDate muc_tieu = null;
+        LocalDate thuc_te = null;
+
+        if (date_muc_tieu != null) {
+            muc_tieu = LocalDate.parse(date_muc_tieu, dateFormatter);
+
+            if (date_thuc_te == null) {
+                // Không có ngày thực tế (chưa hoàn thành công việc)
+                thuc_te = LocalDate.now();
+                long dif = Duration.between(thuc_te.atStartOfDay(), muc_tieu.atStartOfDay()).toDays();
+                if (dif > 0) {
+                    result = "Còn " + Math.abs(dif) + " ngày";
+                }
+                if (dif == 0) {
+                    result = "Deadline";
+                }
+                if (dif < 0) {
+                    result = "Đã chậm " + Math.abs(dif) + " ngày";
+                }
+            } else {
+                thuc_te = LocalDate.parse(date_thuc_te, dateFormatter);
+                long dif = Duration.between(thuc_te.atStartOfDay(), muc_tieu.atStartOfDay()).toDays();
+                if (dif > 0) {
+                    result = "Sớm " + Math.abs(dif) + " ngày";
+                }
+                if (dif == 0) {
+                    result = "Đúng hạn";
+                }
+                if (dif < 0) {
+                    result = "Bị chậm " + Math.abs(dif) + " ngày";
+                }
+            }
+        }
+
+        return result;
+    }
+
+    public String getChenh_lech_DAC() {
+        return tinh_ngay_chenh_lech(hop_dong_DAC, muc_tieu_DAC, thuc_te_DAC);
+    }
+
+    public String getChenh_lech_PAC() {
+        return tinh_ngay_chenh_lech(hop_dong_PAC, muc_tieu_PAC, thuc_te_PAC);
+    }
+
+    public String getChenh_lech_FAC() {
+        return tinh_ngay_chenh_lech(hop_dong_FAC, muc_tieu_FAC, thuc_te_FAC);
     }
 
     public ProjectDetailDto(int id, String uid, String project_name, String customer_name, int project_type_id,
