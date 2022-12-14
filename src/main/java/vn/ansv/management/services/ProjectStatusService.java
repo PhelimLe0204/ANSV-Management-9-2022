@@ -6,15 +6,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import vn.ansv.management.models.ProjectStatus;
-import vn.ansv.management.repositories.ProjectStatusReposiroty;
+import vn.ansv.management.repositories.ProjectStatusRepository;
 
 @Service
 public class ProjectStatusService implements Interface_ProjectStatus {
     @Autowired
-    private ProjectStatusReposiroty projectStatusReposiroty;
+    private ProjectStatusRepository projectStatusRepository;
 
     @Override
     public List<ProjectStatus> findAll_detailProject() {
-        return projectStatusReposiroty.findAll_detailProject();
+        return projectStatusRepository.findAll_detailProject();
     }
 }

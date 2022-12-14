@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 
 import vn.ansv.management.models.ProjectStatus;
 
-public interface ProjectStatusReposiroty extends JpaRepository<ProjectStatus, Integer> {
+public interface ProjectStatusRepository extends JpaRepository<ProjectStatus, Integer> {
     @Query(value = "SELECT * FROM tbl_project_status", nativeQuery = true)
     List<ProjectStatus> findAll_detailProject();
 }
