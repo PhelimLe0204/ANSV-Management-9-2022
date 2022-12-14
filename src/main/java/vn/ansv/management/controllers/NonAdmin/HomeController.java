@@ -90,7 +90,7 @@ public class HomeController extends BaseController {
     _mvShare.addObject("projectType", projectType);
     _mvShare.addObject("projectPriority", projectPriority);
     _mvShare.addObject("projectStatus", projectStatus);
-    _mvShare.setViewName("non-admin/project-detail");
+    _mvShare.setViewName("non-admin/project-detail/main-detail");
     return _mvShare;
   }
 
