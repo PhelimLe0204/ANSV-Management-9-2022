@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.Query;
 import vn.ansv.management.dto.ProjectDetailDto;
 
 public interface ProjectReportRepository extends JpaRepository<ProjectDetailDto, Integer> {
-    @Query(value = "SELECT pr.id, pr.uid, p.project_name, c.customer_name, pr.project_type_id, "
+    @Query(value = "SELECT pr.id, pr.uid, p.id AS project_id, p.project_name, c.customer_name, pr.project_type_id, "
             + "pt.display AS type_name, pr.project_priority_id, pp.display AS priority_name, pr.project_status_id, "
             + "ps.color AS status_color, ps.status_name, pr.currency_unit_id, cu.currency_unit AS currency_unit_display, "
             + "pr.am_manager_id, (SELECT u.fullname from tbl_user AS u WHERE u.id = pr.am_manager_id) AS am_manager_name, "

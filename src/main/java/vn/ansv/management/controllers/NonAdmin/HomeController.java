@@ -8,25 +8,18 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import vn.ansv.management.dto.Dashboard_ProjectDto;
 import vn.ansv.management.dto.ProjectDetailDto;
-import vn.ansv.management.models.Project;
 import vn.ansv.management.models.ProjectPriority;
 import vn.ansv.management.models.ProjectStatus;
 import vn.ansv.management.models.ProjectType;
-import vn.ansv.management.models.ResponseObject;
 import vn.ansv.management.services.ProjectPriorityService;
 import vn.ansv.management.services.ProjectReportService;
-import vn.ansv.management.services.ProjectService;
 import vn.ansv.management.services.ProjectStatusService;
 import vn.ansv.management.services.ProjectTypeService;
 
@@ -34,9 +27,6 @@ import vn.ansv.management.services.ProjectTypeService;
 @RequestMapping(path = "")
 // http:localhost:8083
 public class HomeController extends BaseController {
-
-  @Autowired // Inject "ProjectService" - Dependency Injection
-  private ProjectService projectService;
 
   @Autowired // Inject "ProjectReportService" - Dependency Injection
   private ProjectReportService projectReportService;
@@ -102,19 +92,6 @@ public class HomeController extends BaseController {
     _mvShare.addObject("projectStatus", projectStatus);
     _mvShare.setViewName("non-admin/project-detail/main-detail");
     return _mvShare;
-  }
-
-  @GetMapping("/chi-tiet/getProjectSelectOption")
-  ResponseEntity<ResponseObject> getProjectSelectOption(@PathVariable Long id) {
-    List<Project> data = projectService.findAllSelectOption();
-
-    if (data.size() >= 0) {
-      return ResponseEntity.status(HttpStatus.OK).body(
-          new ResponseObject("success", "Query product successfully", data));
-    } else {
-      return ResponseEntity.status(HttpStatus.NOT_FOUND).body(
-          new ResponseObject("success", "null", ""));
-    }
   }
 
   @RequestMapping(value = "/test/highchart", method = RequestMethod.GET)

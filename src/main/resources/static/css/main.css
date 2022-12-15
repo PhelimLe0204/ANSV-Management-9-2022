@@ -28,3 +28,23 @@
     height: 36px;
     width: 36px;
 }
+
+.select2-selection__rendered {
+    height: 60px !important;
+}
+
+.select2-container .select2-selection--single {
+    height: 60px !important;
+    width: 487px !important;
+}
+
+.select2-selection__clear {
+    font-weight: normal !important;
+    font-size: 30px !important;
+    height: 59px !important;
+}
+
+.select2-selection__arrow {
+    font-size: 30px !important;
+    height: 59px !important;
+}

@@ -17,6 +17,7 @@ public class ProjectDetailDto {
     private int id;
     private String uid;
 
+    private int project_id; // Tên dự án
     private String project_name; // Tên dự án
     private String customer_name; // Khách hàng
 
@@ -165,20 +166,22 @@ public class ProjectDetailDto {
         return tinh_ngay_chenh_lech(hop_dong_FAC, muc_tieu_FAC, thuc_te_FAC);
     }
 
-    public ProjectDetailDto(int id, String uid, String project_name, String customer_name, int project_type_id,
-            String type_name, int project_priority_id, String priority_name, int project_status_id, String status_color,
-            String status_name, int currency_unit_id, String currency_unit_display, int am_manager_id,
-            String am_manager_name, int am_id, String am_name, int pm_manager_id, String pm_manager_name, int pm_id,
-            String pm_name, int week, int year, String ma_hop_dong, String ma_ke_toan, String job_name,
-            String description, String tong_muc_dau_tu_du_kien, String hinh_thuc_dau_tu, int muc_do_kha_thi,
-            String phan_tich_SWOOT, String pham_vi_cung_cap, String tong_gia_tri_thuc_te, String so_tien_tam_ung,
-            String ke_hoach_tam_ung, String so_tien_DAC, String hop_dong_DAC, String muc_tieu_DAC, String thuc_te_DAC,
-            String so_tien_PAC, String hop_dong_PAC, String muc_tieu_PAC, String thuc_te_PAC, String so_tien_FAC,
-            String hop_dong_FAC, String muc_tieu_FAC, String thuc_te_FAC, String general_issue, String solution,
-            String ke_hoach_tuan_nay, String ke_hoach_tuan_sau, String ket_qua_tuan_truoc, String ket_qua_tuan_nay,
-            int enabled, String ghi_chu, String created_by, Date created_at) {
+    public ProjectDetailDto(int id, String uid, int project_id, String project_name, String customer_name,
+            int project_type_id, String type_name, int project_priority_id, String priority_name, int project_status_id,
+            String status_color, String status_name, int currency_unit_id, String currency_unit_display,
+            int am_manager_id, String am_manager_name, int am_id, String am_name, int pm_manager_id,
+            String pm_manager_name, int pm_id, String pm_name, int week, int year, String ma_hop_dong,
+            String ma_ke_toan, String job_name, String description, String tong_muc_dau_tu_du_kien,
+            String hinh_thuc_dau_tu, int muc_do_kha_thi, String phan_tich_SWOOT, String pham_vi_cung_cap,
+            String tong_gia_tri_thuc_te, String so_tien_tam_ung, String ke_hoach_tam_ung, String so_tien_DAC,
+            String hop_dong_DAC, String muc_tieu_DAC, String thuc_te_DAC, String so_tien_PAC, String hop_dong_PAC,
+            String muc_tieu_PAC, String thuc_te_PAC, String so_tien_FAC, String hop_dong_FAC, String muc_tieu_FAC,
+            String thuc_te_FAC, String general_issue, String solution, String ke_hoach_tuan_nay,
+            String ke_hoach_tuan_sau, String ket_qua_tuan_truoc, String ket_qua_tuan_nay, int enabled, String ghi_chu,
+            String created_by, Date created_at, long chenh_lech_DAC, long chenh_lech_PAC, long chenh_lech_FAC) {
         this.id = id;
         this.uid = uid;
+        this.project_id = project_id;
         this.project_name = project_name;
         this.customer_name = customer_name;
         this.project_type_id = project_type_id;
@@ -234,6 +237,9 @@ public class ProjectDetailDto {
         this.ghi_chu = ghi_chu;
         this.created_by = created_by;
         this.created_at = created_at;
+        this.chenh_lech_DAC = chenh_lech_DAC;
+        this.chenh_lech_PAC = chenh_lech_PAC;
+        this.chenh_lech_FAC = chenh_lech_FAC;
     }
 
     public int getId() {
@@ -250,6 +256,14 @@ public class ProjectDetailDto {
 
     public void setUid(String uid) {
         this.uid = uid;
+    }
+
+    public int getProject_id() {
+        return this.project_id;
+    }
+
+    public void setProject_id(int project_id) {
+        this.project_id = project_id;
     }
 
     public String getProject_name() {
@@ -690,6 +704,18 @@ public class ProjectDetailDto {
 
     public void setCreated_at(Date created_at) {
         this.created_at = created_at;
+    }
+
+    public void setChenh_lech_DAC(long chenh_lech_DAC) {
+        this.chenh_lech_DAC = chenh_lech_DAC;
+    }
+
+    public void setChenh_lech_PAC(long chenh_lech_PAC) {
+        this.chenh_lech_PAC = chenh_lech_PAC;
+    }
+
+    public void setChenh_lech_FAC(long chenh_lech_FAC) {
+        this.chenh_lech_FAC = chenh_lech_FAC;
     }
 
 }

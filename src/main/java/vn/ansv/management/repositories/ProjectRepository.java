@@ -13,8 +13,8 @@ public interface ProjectRepository extends JpaRepository<Project, Integer> {
      * Truy vấn project (select option)
      * ----------------------------------
      */
-    @Query(value = "SELECT p.id, NULL AS p.uid, NULL AS customer_id, p.project_name, NULL AS p.description, "
-            + "NULL AS p.enabled, NULL AS p.note, NULL AS created_by, NULL AS created_at "
+    @Query(value = "SELECT p.id, null AS uid, null AS customer_id, p.project_name, null AS description, "
+            + "null AS enabled, null AS note, null AS created_by, null AS created_at "
             + "FROM tbl_project AS p "
             + "WHERE p.enabled = 1", nativeQuery = true)
     List<Project> findAllSelectOption();

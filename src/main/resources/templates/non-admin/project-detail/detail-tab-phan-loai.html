@@ -98,8 +98,8 @@
                                     <table class="table table-striped table-hover">
                                         <tr>
                                             <td class="font-weight-bold">Dự án</td>
-                                            <td th:text="${projectDetail.getProject_name()}">
-                                                <input type="text" class="form-control" name="project_name" th:value="">
+                                            <td id="project-name-select2" class="pt-1 pb-1">
+                                                <select class="js-example-basic-single w-100" name="state"></select>
                                             </td>
                                         </tr>
                                         <tr>
@@ -180,8 +180,9 @@
                     </div>
                 </div>
             </div>
-            <button type="button" class="btn btn-warning pt-1 float-right" data-toggle="modal"
-                data-target="#tabPhanLoaiEditModal" style="height: 30px; width: 130px;">
+            <button type="button" id="phan-loai-open-modal-edit" th:data-id="${projectDetail.getProject_id()}"
+                class="btn btn-warning pt-1 float-right" data-toggle="modal" data-target="#tabPhanLoaiEditModal"
+                style="height: 30px; width: 130px;">
                 <i class="feather mr-2 icon-edit"></i>Chỉnh sửa
             </button>
         </div>
