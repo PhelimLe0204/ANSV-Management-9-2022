@@ -100,7 +100,8 @@
                                         <tr>
                                             <td class="font-weight-bold pt-4">Dự án</td>
                                             <td id="project-name-selection" class="pt-1 pb-1">
-                                                <select id="project-name-select2" name="project_name"></select>
+                                                <select id="project_name" name="project_name"
+                                                    th:data-first="${projectDetail.getProject_id()}"></select>
                                             </td>
                                         </tr>
                                         <tr>
@@ -128,6 +129,10 @@
                                                         </div>
                                                     </th:block>
                                                 </th:block>
+                                                <input type="text" class="form-control" id="project_type"
+                                                    name="project_type"
+                                                    th:data-first="${projectDetail.getProject_type_id()}"
+                                                    th:value="${projectDetail.getProject_type_id()}">
                                             </td>
                                         </tr>
                                         <tr>
