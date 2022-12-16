@@ -1,5 +1,12 @@
 $("#phan-loai-open-modal-edit").click(function () {
+    var $projectChanged = false; // Thay doi du an lon
+    var $stepChanged = false; // Thay doi giai doan du an
+    var $priorityChanged = false; // Thay doi muc do uu tien
+    var $statusChanged = false; // Thay doi tinh trang
+
+    var $count_open = 0;
     var $selected = $(this).attr("data-id");
+    var $fisrtStep = null;
     var data_project_select_option;
 
     $.ajax({
@@ -7,8 +14,8 @@ $("#phan-loai-open-modal-edit").click(function () {
         success: function (result) {
             data_project_select_option = result.data;
 
-            $(".js-example-basic-single").select2({
-                dropdownParent: $('#project-name-select2'),
+            $("#project-name-select2").select2({
+                dropdownParent: $('#project-name-selection'),
                 placeholder: 'Group Category',
                 data: data_project_select_option,
                 allowClear: true,
@@ -46,7 +53,7 @@ $("#phan-loai-open-modal-edit").click(function () {
                         + '</div>'
                     );
 
-                    if (data.project_name) {
+                    if (data.id && data.project_name) {
                         var $state = $(
                             '<div class="row">'
                             + '<div class="col-md-2 pb-1">'
@@ -60,19 +67,54 @@ $("#phan-loai-open-modal-edit").click(function () {
                             + '</div>'
                             + '</div>'
                         );
+
+                        data.id != $selected ? ($projectChanged = true) : ($projectChanged = false);
+                        return $state;
                     }
 
                     return $state;
                 },
             }).on("select2:selecting", (e) => { }).on("select2:unselecting", (e) => { });
 
-            $(".js-example-basic-single").select2("val", $selected);
+            $("#project-name-select2").select2("val", $selected);
         }
+    });
+
+    $(".project-step").click(function () {
+        var onFocus = $(this).hasClass("btn-primary");
+
+        if (onFocus == true) {
+            return;
+        }
+
+        var find_data = $(this).closest('.step-class').find('div[data-status="active"]');
+        if (!$fisrtStep) {
+            $fisrtStep = find_data.attr('id');
+        }
+        console.log("fisrtStep: " + $fisrtStep);
+        find_data.removeClass("btn-primary").addClass("disabled btn-outline-secondary");
+        find_data.attr('data-status', 'notActive');
+        $(this).removeClass("disabled btn-outline-secondary").addClass("btn-primary");
+        $(this).attr('data-status', 'active');
+        if (find_data.attr('id') == $fisrtStep) {
+            $stepChanged = false;
+        } else {
+            $stepChanged = true;
+        }
+    });
+
+    $(".tab-phan-loai-edit-modal-close").click(function () {
+        $count_open++;
+        if ($count_open > 1) {
+            return;
+        }
+        console.log("Hide");
+        console.log("Select project value: " + $("#project-name-select2").val());
     });
 });
 
-// $(".js-example-basic-single").select2({
-//     dropdownParent: $('#project-name-select2'),
+// $("#project-name-select2").select2({
+//     dropdownParent: $('#project-name-selection'),
 //     ajax: {
 //         url: "/api/getProjectSelectOption",
 //         dataType: "json",
