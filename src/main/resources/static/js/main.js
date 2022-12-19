@@ -2,6 +2,7 @@ $("#phan-loai-open-modal-edit").click(function () {
     var $first_project_name = $("#project_name").attr("data-first");
     var $first_project_type = $("#project_type").attr("data-first");
     var $first_project_priority = $("#project_priority").attr("data-first");
+    var $first_project_status = $("#project_status").attr("data-first");
 
     var data_project_select_option;
 
@@ -106,6 +107,29 @@ $("#phan-loai-open-modal-edit").click(function () {
         $(this).removeClass("disabled btn-outline-secondary").addClass("btn-primary");
         $(this).attr('data-status', 'active');
         $("#project_priority").val($(this).attr("id"));
+    });
+
+    // Form input: project_status
+    $(".project-status").click(function () {
+        var onFocus = $(this).hasClass("disabled");
+
+        if (onFocus != true) {
+            return;
+        }
+
+        console.log("fisrt_project_status: " + $first_project_status);
+        var find_data = $(this).closest('.status-class').find('div[data-status="active"]');
+        var old_color = find_data.attr("data-color");
+        var old_color_class_active = "btn-" + old_color;
+        var old_color_class_not_active = "disabled btn-outline-" + old_color;
+        console.log("old_color: " + old_color);
+        console.log("old_color_class_active: " + old_color_class_active);
+        console.log("old_color_class_not_active: " + old_color_class_not_active);
+        find_data.removeClass(old_color_class_active).addClass(old_color_class_not_active);
+        find_data.attr('data-status', 'notActive');
+        $(this).removeClass("disabled btn-outline-" + $(this).attr("data-color")).addClass("btn-" + $(this).attr("data-color"));
+        $(this).attr('data-status', 'active');
+        $("#project_status").val($(this).attr("id"));
     });
 
     // $(".tab-phan-loai-edit-modal-close").click(function () {
