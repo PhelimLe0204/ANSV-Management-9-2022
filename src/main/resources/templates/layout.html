@@ -21,6 +21,18 @@
     <th:block th:if="${#httpServletRequest.requestURI != '/login'}">
         <!-- Font Awesome css -->
         <link rel="stylesheet" th:href="@{/vendors/font-awesome-6.2.1/all.min.css}" type="text/css">
+
+        <!-- Select2 - CSS -->
+        <link th:href="@{/vendors/select2/css/select2.min.css}" rel="stylesheet" />
+
+        <!-- AlertifyJS - CSS -->
+        <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css" />
+        <!-- AlertifyJS - Default theme -->
+        <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.min.css" />
+        <!-- AlertifyJS - Semantic UI theme -->
+        <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/semantic.min.css" />
+        <!-- AlertifyJS - Bootstrap theme -->
+        <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/bootstrap.min.css" />
     </th:block>
 
     <th:block th:if="${#httpServletRequest.requestURI == '/dashboard'}">
@@ -71,9 +83,12 @@
     </th:block>
 
     <th:block th:if="${#httpServletRequest.requestURI != '/login'}">
-        <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
-        <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-        
+        <!-- Select2 - JS -->
+        <script th:src="@{/vendors/select2/js/select2.min.js}"></script>
+
+        <!-- AlertifyJS - JS -->
+        <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
+
         <script th:src="@{/js/main.js}"></script>
     </th:block>
 </body>

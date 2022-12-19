@@ -1,8 +1,8 @@
 $("#phan-loai-open-modal-edit").click(function () {
     var $first_project_name = $("#project_name").attr("data-first");
     var $first_project_type = $("#project_type").attr("data-first");
+    var $first_project_priority = $("#project_priority").attr("data-first");
 
-    var $count_open = 0;
     var data_project_select_option;
 
     $.ajax({
@@ -74,6 +74,7 @@ $("#phan-loai-open-modal-edit").click(function () {
         }
     });
 
+    // Form input: project_type
     $(".project-step").click(function () {
         var onFocus = $(this).hasClass("btn-primary");
 
@@ -81,21 +82,52 @@ $("#phan-loai-open-modal-edit").click(function () {
             return;
         }
 
-        console.log("fisrtStep: " + $first_project_type);
+        console.log("fisrt_project_type: " + $first_project_type);
         var find_data = $(this).closest('.step-class').find('div[data-status="active"]');
         find_data.removeClass("btn-primary").addClass("disabled btn-outline-secondary");
         find_data.attr('data-status', 'notActive');
         $(this).removeClass("disabled btn-outline-secondary").addClass("btn-primary");
         $(this).attr('data-status', 'active');
+        $("#project_type").val($(this).attr("id"));
     });
 
-    $(".tab-phan-loai-edit-modal-close").click(function () {
-        $count_open++;
-        if ($count_open > 1) {
+    // Form input: project_priority
+    $(".project-priority").click(function () {
+        var onFocus = $(this).hasClass("btn-primary");
+
+        if (onFocus == true) {
             return;
         }
-        console.log("Hide");
-        console.log("Select project value: " + $("#project_name").val());
+
+        console.log("fisrt_project_priority: " + $first_project_priority);
+        var find_data = $(this).closest('.priority-class').find('div[data-status="active"]');
+        find_data.removeClass("btn-primary").addClass("disabled btn-outline-secondary");
+        find_data.attr('data-status', 'notActive');
+        $(this).removeClass("disabled btn-outline-secondary").addClass("btn-primary");
+        $(this).attr('data-status', 'active');
+        $("#project_priority").val($(this).attr("id"));
+    });
+
+    // $(".tab-phan-loai-edit-modal-close").click(function () {
+    //     $count_open++;
+    //     if ($count_open > 1) {
+    //         return;
+    //     }
+    //     if ($("#project_name").val() != $first_project_name) {
+    //         return alertify.confirm(
+    //             'Thông báo', 'Dữ liệu đã thay đổi sẽ được hoàn tác, bạn chắc chứ!',
+    //             function () { alertify.success('Dữ liệu hoàn tác!') },
+    //             function () { }
+    //         );
+    //     }
+    //     console.log("Hide");
+    //     console.log("Select project value: " + $("#project_name").val());
+    // });
+
+    $(".tab-phan-loai-edit-modal-close").click(function () {
+        if ($("#project_name").val() == $first_project_name) {
+            $('#tabPhanLoaiEditModal').modal('hide');
+        }
     });
 });
 
