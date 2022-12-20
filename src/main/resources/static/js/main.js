@@ -2,7 +2,7 @@ var $first_week = $("#week").attr("data-first");
 var $first_year = $("#year").attr("data-first");
 var $first_ma_hop_dong = $("#ma_hop_dong").attr("data-first");
 var $first_ma_ke_toan = $("#ma_ke_toan").attr("data-first");
-var $first_currency_unit = $("#currency_unit").attr("data-first");
+var $first_currency_unit_id = $("#currency_unit_id").attr("data-first");
 var $week = null;
 var $current_year = null;
 
@@ -19,12 +19,11 @@ $(document).ready(function () {
 
 $("#phan-loai-open-modal-edit").click(function () {
     var $first_project_id = $("#project_id").attr("data-first");
-    var $first_project_type = $("#project_type").attr("data-first");
-    var $first_project_priority = $("#project_priority").attr("data-first");
-    var $first_project_status = $("#project_status").attr("data-first");
+    var $first_project_type_id = $("#project_type_id").attr("data-first");
+    var $first_project_priority_id = $("#project_priority_id").attr("data-first");
+    var $first_project_status_id = $("#project_status_id").attr("data-first");
 
     var data_project_select_option;
-    var data_currency_unit_select_option;
 
     // Ajax get data for project's selection
     $.ajax({
@@ -96,7 +95,7 @@ $("#phan-loai-open-modal-edit").click(function () {
         }
     });
 
-    // Form input: project_type
+    // Form input: project_type_id
     $(".project-step").click(function () {
         var onFocus = $(this).hasClass("btn-primary");
 
@@ -104,16 +103,15 @@ $("#phan-loai-open-modal-edit").click(function () {
             return;
         }
 
-        console.log("fisrt_project_type: " + $first_project_type);
         var find_data = $(this).closest('.step-class').find('div[data-status="active"]');
         find_data.removeClass("btn-primary").addClass("disabled btn-outline-secondary");
         find_data.attr('data-status', 'notActive');
         $(this).removeClass("disabled btn-outline-secondary").addClass("btn-primary");
         $(this).attr('data-status', 'active');
-        $("#project_type").val($(this).attr("id"));
+        $("#project_type_id").val($(this).attr("id"));
     });
 
-    // Form input: project_priority
+    // Form input: project_priority_id
     $(".project-priority").click(function () {
         var onFocus = $(this).hasClass("btn-primary");
 
@@ -121,16 +119,15 @@ $("#phan-loai-open-modal-edit").click(function () {
             return;
         }
 
-        console.log("fisrt_project_priority: " + $first_project_priority);
         var find_data = $(this).closest('.priority-class').find('div[data-status="active"]');
         find_data.removeClass("btn-primary").addClass("disabled btn-outline-secondary");
         find_data.attr('data-status', 'notActive');
         $(this).removeClass("disabled btn-outline-secondary").addClass("btn-primary");
         $(this).attr('data-status', 'active');
-        $("#project_priority").val($(this).attr("id"));
+        $("#project_priority_id").val($(this).attr("id"));
     });
 
-    // Form input: project_status
+    // Form input: project_status_id
     $(".project-status").click(function () {
         var onFocus = $(this).hasClass("disabled");
 
@@ -146,7 +143,7 @@ $("#phan-loai-open-modal-edit").click(function () {
         find_data.attr('data-status', 'notActive');
         $(this).removeClass("disabled btn-outline-" + $(this).attr("data-color")).addClass("btn-" + $(this).attr("data-color"));
         $(this).attr('data-status', 'active');
-        $("#project_status").val($(this).attr("id"));
+        $("#project_status_id").val($(this).attr("id"));
     });
 
     var htmlSelectWeek = null;
@@ -169,17 +166,13 @@ $("#phan-loai-open-modal-edit").click(function () {
     }
     $("#year").html(htmlSelectYear);
 
-    // Form input: currency_unit
+    // Form input: currency_unit_id
     $.ajax({
         url: "/api/getCurrencyUnitSelectOption",
         success: function (result) {
-            data_currency_unit_select_option = result.data;
-            console.log(result.data);
-            console.log($first_currency_unit);
-
             var htmlSelectCurrencyUnit = null;
             for (let i = 0; i < result.data.length; i++) {
-                if (result.data[i].id == $first_currency_unit) {
+                if (result.data[i].id == $first_currency_unit_id) {
                     htmlSelectCurrencyUnit += '<option value="' + result.data[i].id
                         + '" class="text-white bg-secondary font-weight-bold" selected>'
                         + result.data[i].currency_unit + '</option>';
@@ -188,7 +181,7 @@ $("#phan-loai-open-modal-edit").click(function () {
                         + result.data[i].currency_unit + '</option>';
                 }
             }
-            $("#currency_unit").html(htmlSelectCurrencyUnit);
+            $("#currency_unit_id").html(htmlSelectCurrencyUnit);
         }
     });
 
@@ -204,8 +197,6 @@ $("#phan-loai-open-modal-edit").click(function () {
     //             function () { }
     //         );
     //     }
-    //     console.log("Hide");
-    //     console.log("Select project value: " + $("#project_name").val());
     // });
 
     $(".tab-phan-loai-edit-modal-close").click(function () {
@@ -231,7 +222,6 @@ $("#phan-loai-open-modal-edit").click(function () {
 //         processResults: function (data) {
 //             return {
 //                 results: $.map(data, function (item) {
-//                     console.log(item);
 //                     return {
 //                         text: item[0].project_name,
 //                         id: item[0].id

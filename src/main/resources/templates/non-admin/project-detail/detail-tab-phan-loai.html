@@ -129,9 +129,9 @@
                                                         </div>
                                                     </th:block>
                                                 </th:block>
-                                                <!-- Input project_type -->
-                                                <input type="text" class="form-control" id="project_type"
-                                                    name="project_type"
+                                                <!-- Input project_type_id -->
+                                                <input type="text" class="form-control" id="project_type_id"
+                                                    name="project_type_id"
                                                     th:data-first="${projectDetail.getProject_type_id()}"
                                                     th:value="${projectDetail.getProject_type_id()}">
                                             </td>
@@ -161,9 +161,9 @@
                                                         </div>
                                                     </th:block>
                                                 </th:block>
-                                                <!-- Input project_priority -->
-                                                <input type="text" class="form-control" id="project_priority"
-                                                    name="project_priority"
+                                                <!-- Input project_priority_id -->
+                                                <input type="text" class="form-control" id="project_priority_id"
+                                                    name="project_priority_id"
                                                     th:data-first="${projectDetail.getProject_priority_id()}"
                                                     th:value="${projectDetail.getProject_priority_id()}">
                                             </td>
@@ -197,9 +197,9 @@
                                                         </div>
                                                     </th:block>
                                                 </th:block>
-                                                <!-- Input project_status -->
-                                                <input type="text" class="form-control" id="project_status"
-                                                    name="project_status"
+                                                <!-- Input project_status_id -->
+                                                <input type="text" class="form-control" id="project_status_id"
+                                                    name="project_status_id"
                                                     th:data-first="${projectDetail.getProject_status_id()}"
                                                     th:value="${projectDetail.getProject_status_id()}">
                                             </td>
@@ -247,7 +247,8 @@
                                         <tr>
                                             <td class="font-weight-bold">Đơn vị tiền tệ</td>
                                             <td class="pt-1 pb-1">
-                                                <select id="currency_unit" name="currency_unit"
+                                                <!-- Input currency_unit_id -->
+                                                <select id="currency_unit_id" name="currency_unit_id"
                                                     class="form-control bg-white"
                                                     th:data-first="${projectDetail.getCurrency_unit_id()}">
                                                     <option value="VND">VND</option>
