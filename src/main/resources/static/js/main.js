@@ -1,17 +1,38 @@
+var $first_week = $("#week").attr("data-first");
+var $first_year = $("#year").attr("data-first");
+var $first_ma_hop_dong = $("#ma_hop_dong").attr("data-first");
+var $first_ma_ke_toan = $("#ma_ke_toan").attr("data-first");
+var $first_currency_unit = $("#currency_unit").attr("data-first");
+var $week = null;
+var $current_year = null;
+
+$(document).ready(function () {
+    var currentYear = new Date().getFullYear();
+    $current_year = currentYear;
+    theLastDayOfYear = new Date(currentYear, 11, 31);
+    var year = new Date(theLastDayOfYear.getFullYear(), 0, 1);
+    var days = Math.floor((theLastDayOfYear - year) / (24 * 60 * 60 * 1000));
+    var week = Math.ceil((theLastDayOfYear.getDay() + 1 + days) / 7);
+    console.log("The current year (" + currentYear + ") has " + (week + 1) + " week.");
+    $week = week + 1;
+});
+
 $("#phan-loai-open-modal-edit").click(function () {
-    var $first_project_name = $("#project_name").attr("data-first");
+    var $first_project_id = $("#project_id").attr("data-first");
     var $first_project_type = $("#project_type").attr("data-first");
     var $first_project_priority = $("#project_priority").attr("data-first");
     var $first_project_status = $("#project_status").attr("data-first");
 
     var data_project_select_option;
+    var data_currency_unit_select_option;
 
+    // Ajax get data for project's selection
     $.ajax({
         url: "/api/getProjectSelectOption",
         success: function (result) {
             data_project_select_option = result.data;
 
-            $("#project_name").select2({
+            $("#project_id").select2({
                 dropdownParent: $('#project-name-selection'),
                 placeholder: 'Group Category',
                 data: data_project_select_option,
@@ -71,7 +92,7 @@ $("#phan-loai-open-modal-edit").click(function () {
                 },
             }).on("select2:selecting", (e) => { }).on("select2:unselecting", (e) => { });
 
-            $("#project_name").select2("val", $first_project_name);
+            $("#project_id").select2("val", $first_project_id);
         }
     });
 
@@ -117,19 +138,58 @@ $("#phan-loai-open-modal-edit").click(function () {
             return;
         }
 
-        console.log("fisrt_project_status: " + $first_project_status);
         var find_data = $(this).closest('.status-class').find('div[data-status="active"]');
         var old_color = find_data.attr("data-color");
         var old_color_class_active = "btn-" + old_color;
         var old_color_class_not_active = "disabled btn-outline-" + old_color;
-        console.log("old_color: " + old_color);
-        console.log("old_color_class_active: " + old_color_class_active);
-        console.log("old_color_class_not_active: " + old_color_class_not_active);
         find_data.removeClass(old_color_class_active).addClass(old_color_class_not_active);
         find_data.attr('data-status', 'notActive');
         $(this).removeClass("disabled btn-outline-" + $(this).attr("data-color")).addClass("btn-" + $(this).attr("data-color"));
         $(this).attr('data-status', 'active');
         $("#project_status").val($(this).attr("id"));
+    });
+
+    var htmlSelectWeek = null;
+    for (let i = 1; i <= $week; i++) {
+        if (i == $first_week) {
+            htmlSelectWeek += '<option value="' + i + '" class="text-white bg-secondary font-weight-bold" selected>' + i + '</option>';
+        } else {
+            htmlSelectWeek += '<option value="' + i + '">' + i + '</option>';
+        }
+    }
+    $("#week").html(htmlSelectWeek);
+
+    var htmlSelectYear = null;
+    for (let i = 2021; i <= $current_year; i++) {
+        if (i == $first_year) {
+            htmlSelectYear += '<option value="' + i + '" class="text-white bg-secondary font-weight-bold" selected>' + i + '</option>';
+        } else {
+            htmlSelectYear += '<option value="' + i + '">' + i + '</option>';
+        }
+    }
+    $("#year").html(htmlSelectYear);
+
+    // Form input: currency_unit
+    $.ajax({
+        url: "/api/getCurrencyUnitSelectOption",
+        success: function (result) {
+            data_currency_unit_select_option = result.data;
+            console.log(result.data);
+            console.log($first_currency_unit);
+
+            var htmlSelectCurrencyUnit = null;
+            for (let i = 0; i < result.data.length; i++) {
+                if (result.data[i].id == $first_currency_unit) {
+                    htmlSelectCurrencyUnit += '<option value="' + result.data[i].id
+                        + '" class="text-white bg-secondary font-weight-bold" selected>'
+                        + result.data[i].currency_unit + '</option>';
+                } else {
+                    htmlSelectCurrencyUnit += '<option value="' + result.data[i].id + '">'
+                        + result.data[i].currency_unit + '</option>';
+                }
+            }
+            $("#currency_unit").html(htmlSelectCurrencyUnit);
+        }
     });
 
     // $(".tab-phan-loai-edit-modal-close").click(function () {
@@ -149,9 +209,10 @@ $("#phan-loai-open-modal-edit").click(function () {
     // });
 
     $(".tab-phan-loai-edit-modal-close").click(function () {
-        if ($("#project_name").val() == $first_project_name) {
-            $('#tabPhanLoaiEditModal').modal('hide');
-        }
+        // if ($("#project_id").val() == $first_project_id) {
+        //     $('#tabPhanLoaiEditModal').modal('hide');
+        // }
+        $('#tabPhanLoaiEditModal').modal('hide');
     });
 });
 
