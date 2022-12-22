@@ -7,6 +7,26 @@ var $week = null;
 var $current_year = null;
 
 $(document).ready(function () {
+    alertify.confirm().set({
+        onshow: function () {
+            $(".ajs-dialog").addClass("ajs-dialog-custom");
+        }
+    });
+    var urlParams = new URLSearchParams(window.location.search);
+    var updateSuccess = urlParams.get('updateSuccess');
+    var tab = urlParams.get('tab');
+    var message = detectMessage(tab);
+
+    if (updateSuccess && !message) {
+        alertify.warning('Hệ thống không nhận diện được hành động của bạn!');
+    }
+    if (updateSuccess == 'true' && message) {
+        alertify.success('Cập nhật mục "' + message + '" thành công!');
+    }
+    if (updateSuccess == 'false' && message) {
+        alertify.error('Cập nhật mục "' + message + '" không thành công!');
+    }
+
     var currentYear = new Date().getFullYear();
     $current_year = currentYear;
     theLastDayOfYear = new Date(currentYear, 11, 31);
@@ -24,6 +44,20 @@ $("#phan-loai-open-modal-edit").click(function () {
     var $first_project_status_id = $("#project_status_id").attr("data-first");
 
     var data_project_select_option;
+
+    $("#form-tab-phan-loai-edit").submit(function (e) {
+        e.preventDefault();
+        alertify.confirm(
+            'Xác nhận',
+            '<p class="text-center pb-2"><i class="feather icon-alert-circle text-warning h1"></i></p>'
+            + '<p class="text-center">'
+            + 'Cập nhật mục "<span class="text-primary font-weight-bold">PHÂN LOẠI</span>"<br>'
+            + 'Bạn chắc chứ?'
+            + '</p>',
+            function () { e.currentTarget.submit(); },
+            function () { }
+        ).set('resizable', true).resizeTo(100, 200);
+    });
 
     // Ajax get data for project's selection
     $.ajax({
@@ -206,6 +240,35 @@ $("#phan-loai-open-modal-edit").click(function () {
         $('#tabPhanLoaiEditModal').modal('hide');
     });
 });
+
+$("#detail-update-tab-1").submit(function (event) {
+    var firstfield_value = event.currentTarget[3].value;
+
+    var secondfield_value = event.currentTarget[1].value;
+
+    console.log(event.currentTarget);
+    console.log(firstfield_value + " - " + secondfield_value);
+    event.preventDefault();
+});
+
+function detectMessage(data) {
+    if (data == 1) {
+        return 'PHÂN LOẠI';
+    }
+    if (data == 2) {
+        return 'THÀNH VIÊN';
+    }
+    if (data == 3) {
+        return 'DỰ THẦU';
+    }
+    if (data == 4) {
+        return 'CHI PHÍ & THỜI GIAN';
+    }
+    if (data == 5) {
+        return 'QUA TRÌNH';
+    }
+    return null;
+}
 
 // $("#project_name").select2({
 //     dropdownParent: $('#project-name-selection'),

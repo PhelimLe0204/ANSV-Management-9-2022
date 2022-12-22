@@ -1,0 +1,33 @@
+/* Start: Alertify custom */
+.ajs-dialog-custom {
+    max-width: 25% !important;
+    min-width: 380px !important;
+    height: 230px !important;
+}
+
+.alertify .ajs-header {
+    background-color: #ffba57 !important;
+    min-height: 42px !important;
+}
+
+.alertify.ajs-maximized .ajs-body .ajs-content,
+.alertify.ajs-resizable .ajs-body .ajs-content {
+    top: 60px !important;
+    bottom: 4px !important;
+}
+
+.alertify .ajs-footer {
+    background-color: #ffba57 !important;
+    min-height: 42px !important;
+}
+
+.alertify.ajs-maximized .ajs-footer,
+.alertify.ajs-resizable .ajs-footer {
+    height: 42px;
+}
+
+.alertify .ajs-footer .ajs-buttons.ajs-primary {
+    margin-top: -16px;
+}
+
+/* end: Alertify custom */
