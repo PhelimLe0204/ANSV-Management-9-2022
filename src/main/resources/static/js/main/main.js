@@ -5,6 +5,7 @@ var $first_ma_ke_toan = $("#ma_ke_toan").attr("data-first");
 var $first_currency_unit_id = $("#currency_unit_id").attr("data-first");
 var $week = null;
 var $current_year = null;
+var $formDataOrigin = null;
 
 $(document).ready(function () {
     alertify.confirm().set({
@@ -43,10 +44,20 @@ $("#phan-loai-open-modal-edit").click(function () {
     var $first_project_priority_id = $("#project_priority_id").attr("data-first");
     var $first_project_status_id = $("#project_status_id").attr("data-first");
 
+    $formDataOrigin = getFormData($("#form-tab-phan-loai-edit"));
+
     var data_project_select_option;
 
     $("#form-tab-phan-loai-edit").submit(function (e) {
         e.preventDefault();
+
+        var dataCompare = getFormData($(this));
+        if (dataCompare == $formDataOrigin) {
+            alertify.notify('Bạn chưa thay đổi dữ liệu!', 'custom', 2);
+            // alertify.notify('Bạn chưa thay đổi dữ liệu!', 'custom', 5, function () { console.log('dismissed'); });
+            return;
+        }
+
         alertify.confirm(
             'Xác nhận',
             '<p class="text-center pb-2"><i class="feather icon-alert-circle text-warning h1"></i></p>'
@@ -54,8 +65,12 @@ $("#phan-loai-open-modal-edit").click(function () {
             + 'Cập nhật mục "<span class="text-primary font-weight-bold">PHÂN LOẠI</span>"<br>'
             + 'Bạn chắc chứ?'
             + '</p>',
-            function () { e.currentTarget.submit(); },
-            function () { }
+            function () {
+                e.currentTarget.submit(); // OK => Allow form submit
+            },
+            function () {
+                // Cancel => Do nothing
+            }
         ).set('resizable', true).resizeTo(100, 200);
     });
 
@@ -268,6 +283,12 @@ function detectMessage(data) {
         return 'QUA TRÌNH';
     }
     return null;
+}
+
+// Get Form data
+function getFormData(form) {
+    var data = JSON.stringify($(form).serializeArray());
+    return data;
 }
 
 // $("#project_name").select2({

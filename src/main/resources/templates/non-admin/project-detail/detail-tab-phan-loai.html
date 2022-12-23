@@ -103,7 +103,11 @@
                                                 <td id="project-name-selection" class="w-75 pt-1 pb-1">
                                                     <!-- Input project_id -->
                                                     <select id="project_id" name="project_id"
-                                                        th:data-first="${projectDetail.getProject_id()}"></select>
+                                                        th:data-first="${projectDetail.getProject_id()}">
+                                                        <option th:value="${projectDetail.getProject_id()}"
+                                                            th:text="${projectDetail.getProject_name()}" selected>
+                                                        </option>
+                                                    </select>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -221,7 +225,8 @@
                                                     <!-- Input week -->
                                                     <select id="week" name="week" class="form-control bg-white"
                                                         th:data-first="${projectDetail.getWeek()}">
-                                                        <option value="1">1</option>
+                                                        <option th:value="${projectDetail.getWeek()}"
+                                                            th:text="${projectDetail.getWeek()}" selected></option>
                                                     </select>
                                                 </td>
                                             </tr>
@@ -231,7 +236,8 @@
                                                     <!-- Input year -->
                                                     <select id="year" name="year" class="form-control bg-white"
                                                         th:data-first="${projectDetail.getYear()}">
-                                                        <option value="2022">2022</option>
+                                                        <option th:value="${projectDetail.getYear()}"
+                                                            th:text="${projectDetail.getYear()}" selected></option>
                                                     </select>
                                                 </td>
                                             </tr>
@@ -262,7 +268,10 @@
                                                     <select id="currency_unit_id" name="currency_unit_id"
                                                         class="form-control bg-white"
                                                         th:data-first="${projectDetail.getCurrency_unit_id()}">
-                                                        <option value="VND">VND</option>
+                                                        <option th:value="${projectDetail.getCurrency_unit_id()}"
+                                                            th:text="${projectDetail.getCurrency_unit_display()}"
+                                                            selected>
+                                                        </option>
                                                     </select>
                                                 </td>
                                             </tr>

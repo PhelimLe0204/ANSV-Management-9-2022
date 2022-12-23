@@ -30,4 +30,10 @@
     margin-top: -16px;
 }
 
+.alertify-notifier .ajs-message.ajs-custom {
+    color: #FFF;
+    background-color: #ffba57;
+    border-color: #fd7e14;
+}
+
 /* end: Alertify custom */
