@@ -91,24 +91,51 @@ $("#phan-loai-open-modal-edit").click(function () {
             + 'Bạn chắc chứ?'
             + '</p>',
             function () {
-                // Hoàn tác select2 (dự án) và các button (giai đoạn, mức độ ưu tiên, trạng thái)
+                /* === Reset dự án === */
                 $("#project_id").select2("val", $first_project_id); // Reset dự án
 
+                /* === Reset giai đoạn === */
                 var current_project_type_id = $('.project-step').closest('.step-class').find('div[data-status="active"]').attr('id');
-                var current_project_priority = $('.project-priority').closest('.priority-class').find('div[data-status="active"]');
-                var current_project_status = $('.project-status').closest('.status-class').find('div[data-status="active"]');
-
                 // console.log(current_project_type.attr('id') + " - " + current_project_priority.attr('id') + " - " + current_project_status.attr('id'));
-                console.log("Giai đoạn sau khi chọn: " + current_project_type_id);
-                console.log("Giai đoạn trước khi chọn: " + $first_project_type_id);
-
+                console.log("Giai đoạn trước / sau chọn: " + $first_project_type_id + " / " + current_project_type_id);
                 if (current_project_type_id != $first_project_type_id) {
-                    // Reset project's type
+                    // Reset template
                     $('#' + current_project_type_id).removeClass("btn-primary").addClass("disabled btn-outline-secondary");
                     $('#' + current_project_type_id).attr('data-status', 'notActive');
                     $('#project-type-' + $first_project_type_id).removeClass("disabled btn-outline-secondary").addClass("btn-primary");
                     $('#project-type-' + $first_project_type_id).attr('data-status', 'active');
                 }
+
+                /* === Reset mức độ ưu tiên === */
+                var current_project_priority_id = $('.project-priority').closest('.priority-class').find('div[data-status="active"]').attr('id');
+                console.log("Ưu tiên trước / sau chọn: " + $first_project_priority_id + " / " + current_project_priority_id);
+                if (current_project_priority_id != $first_project_priority_id) {
+                    // Reset template
+                    $('#' + current_project_priority_id).removeClass("btn-primary").addClass("disabled btn-outline-secondary");
+                    $('#' + current_project_priority_id).attr('data-status', 'notActive');
+                    $('#project-priority-' + $first_project_priority_id).removeClass("disabled btn-outline-secondary").addClass("btn-primary");
+                    $('#project-priority-' + $first_project_priority_id).attr('data-status', 'active');
+                }
+
+                /* === Reset trạng thái === */
+                var current_project_status_id = $('.project-status').closest('.status-class').find('div[data-status="active"]').attr('id');
+                // console.log(current_project_type.attr('id') + " - " + current_project_priority.attr('id') + " - " + current_project_status.attr('id'));
+                console.log("Trạng thái trước / sau chọn: " + $first_project_status_id + " / " + current_project_status_id);
+                if (current_project_status_id != $first_project_status_id) {
+                    // Reset template
+                    var current_color = $('#' + current_project_status_id).attr("data-color");
+                    var current_color_class_active = "btn-" + current_color;
+                    var current_color_class_not_active = "disabled btn-outline-" + current_color;
+                    $('#' + current_project_status_id).removeClass(current_color_class_active).addClass(current_color_class_not_active);
+                    $('#' + current_project_status_id).attr('data-status', 'notActive');
+
+                    var first_color = $('#project-status-' + $first_project_status_id).attr("data-color");
+                    var first_color_class_active = "btn-" + first_color;
+                    var first_color_class_not_active = "disabled btn-outline-" + first_color;
+                    $('#project-status-' + $first_project_status_id).removeClass(first_color_class_not_active).addClass(first_color_class_active);
+                    $('#project-status-' + $first_project_status_id).attr('data-status', 'active');
+                }
+
                 $("#form-tab-phan-loai-edit")[0].reset(); // Hoàn tác dữ liệu form
                 alertify.success('Dữ liệu hoàn tác!').delay(1);
 

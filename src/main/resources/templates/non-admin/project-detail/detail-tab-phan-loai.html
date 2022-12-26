@@ -153,7 +153,7 @@
                                                         <th:block
                                                             th:if="${projectPriorityItem.getId() != projectDetail.getProject_priority_id()}">
                                                             <div class="project-priority btn disabled btn-outline-secondary pt-1"
-                                                                th:id="${projectPriorityItem.getId()}"
+                                                                th:id="'project-priority-' + ${projectPriorityItem.getId()}"
                                                                 data-status="notActive"
                                                                 style="height: 30px; width: 165px;">
                                                                 <i class="fa-light fa-circle-1"></i>
@@ -164,7 +164,7 @@
                                                         <th:block
                                                             th:if="${projectPriorityItem.getId() == projectDetail.getProject_priority_id()}">
                                                             <div class="project-priority btn btn-primary pt-1"
-                                                                th:id="${projectPriorityItem.getId()}"
+                                                                th:id="'project-priority-' + ${projectPriorityItem.getId()}"
                                                                 data-status="active"
                                                                 style="height: 30px; width: 165px;">
                                                                 <i class="fa-light fa-circle-1"></i>
@@ -188,7 +188,7 @@
                                                             th:if="${projectStatusItem.getId() != projectDetail.getProject_status_id()}">
                                                             <div class="project-status btn pt-1 disabled"
                                                                 th:classappend="'btn-outline-' + ${projectStatusItem.getColor()}"
-                                                                th:id="${projectStatusItem.getId()}"
+                                                                th:id="'project-status-' + ${projectStatusItem.getId()}"
                                                                 data-status="notActive"
                                                                 th:data-color="${projectStatusItem.getColor()}"
                                                                 style="height: 30px; width: 165px;">
@@ -201,7 +201,7 @@
                                                             th:if="${projectStatusItem.getId() == projectDetail.getProject_status_id()}">
                                                             <div class="project-status btn pt-1"
                                                                 th:classappend="'btn-' + ${projectStatusItem.getColor()}"
-                                                                th:id="${projectStatusItem.getId()}"
+                                                                th:id="'project-status-' + ${projectStatusItem.getId()}"
                                                                 data-status="active"
                                                                 th:data-color="${projectStatusItem.getColor()}"
                                                                 style="height: 30px; width: 165px;">
