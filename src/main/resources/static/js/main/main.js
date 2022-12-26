@@ -39,8 +39,8 @@ $("#phan-loai-open-modal-edit").click(function () {
     var $first_project_status_id = $("#project_status_id").attr("data-first");
     var $first_week = $("#week").attr("data-first");
     var $first_year = $("#year").attr("data-first");
-    var $first_ma_hop_dong = $("#ma_hop_dong").attr("data-first");
-    var $first_ma_ke_toan = $("#ma_ke_toan").attr("data-first");
+    // var $first_ma_hop_dong = $("#ma_hop_dong").attr("data-first");
+    // var $first_ma_ke_toan = $("#ma_ke_toan").attr("data-first");
     var $first_currency_unit_id = $("#currency_unit_id").attr("data-first");
     var $formDataOrigin = getFormData($("#form-tab-phan-loai-edit"));
 
@@ -59,7 +59,7 @@ $("#phan-loai-open-modal-edit").click(function () {
         }
 
         alertify.confirm(
-            'Xác nhận',
+            'Xác nhận cập nhật',
             '<p class="text-center pb-2"><i class="feather icon-alert-circle text-warning h1"></i></p>'
             + '<p class="text-center">'
             + 'Cập nhật mục "<span class="text-primary font-weight-bold">PHÂN LOẠI</span>"<br>'
@@ -84,7 +84,7 @@ $("#phan-loai-open-modal-edit").click(function () {
 
 
         alertify.confirm(
-            'Xác nhận',
+            'Xác nhận hoàn tác',
             '<p class="text-center pb-2"><i class="feather icon-alert-circle text-warning h1"></i></p>'
             + '<p class="text-center">'
             + 'Hoàn tác dữ liệu đã thay đổi<br><span class="text-primary font-weight-bold">PHÂN LOẠI</span><br>'
@@ -309,28 +309,28 @@ $("#phan-loai-open-modal-edit").click(function () {
         }
     });
 
-    // $(".tab-phan-loai-edit-modal-close").click(function () {
-    //     $count_open++;
-    //     if ($count_open > 1) {
-    //         return;
-    //     }
-    //     if ($("#project_name").val() != $first_project_name) {
-    //         return alertify.confirm(
-    //             'Thông báo', 'Dữ liệu đã thay đổi sẽ được hoàn tác, bạn chắc chứ!',
-    //             function () { alertify.success('Dữ liệu hoàn tác!') },
-    //             function () { }
-    //         );
-    //     }
-    // });
-
-    // Close Modal
+    // Close Modal update tab 1
     $(".tab-phan-loai-edit-modal-close").click(function () {
         var dataCompare = getFormData($("#form-tab-phan-loai-edit"));
         if (dataCompare == $formDataOrigin) {
             $('#tabPhanLoaiEditModal').modal('hide');
             return;
         }
-        document.getElementById('form-tab-phan-loai-edit').reset();
+
+        alertify.confirm(
+            'Xác nhận hủy',
+            '<p class="text-center pb-2"><i class="feather icon-alert-circle text-warning h1"></i></p>'
+            + '<p class="text-center">'
+            + 'Dữ liệu hiện tại sẽ hoàn tác<br><span class="text-primary font-weight-bold">PHÂN LOẠI</span><br>'
+            + 'Bạn chắc chắn muốn hủy?'
+            + '</p>',
+            function () {
+                $('#tabPhanLoaiEditModal').modal('hide');
+            },
+            function () {
+                // Cancel => Do nothing
+            }
+        );
     });
 });
 
