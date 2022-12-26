@@ -117,7 +117,8 @@
                                                         <th:block
                                                             th:if="${projectTypeItem.getId() != projectDetail.getProject_type_id()}">
                                                             <div class="project-step btn disabled btn-outline-secondary pt-1"
-                                                                th:id="${projectTypeItem.getId()}"
+                                                                th:id="'project-type-' + ${projectTypeItem.getId()}"
+                                                                th:data-input="${projectTypeItem.getId()}"
                                                                 data-status="notActive"
                                                                 style="height: 30px; width: 165px;">
                                                                 <i class="fa-light fa-circle-1"></i>
@@ -128,7 +129,9 @@
                                                         <th:block
                                                             th:if="${projectTypeItem.getId() == projectDetail.getProject_type_id()}">
                                                             <div class="project-step btn btn-primary pt-1"
-                                                                th:id="${projectTypeItem.getId()}" data-status="active"
+                                                                th:id="'project-type-' + ${projectTypeItem.getId()}"
+                                                                th:data-input="${projectTypeItem.getId()}"
+                                                                data-status="active"
                                                                 style="height: 30px; width: 165px;">
                                                                 <i class="fa-light fa-circle-1"></i>
                                                                 <th:block th:text="${projectTypeItem.getDisplay()}">
@@ -137,7 +140,7 @@
                                                         </th:block>
                                                     </th:block>
                                                     <!-- Input project_type_id -->
-                                                    <input type="hidden" class="form-control" id="project_type_id"
+                                                    <input type="text" class="d-none" id="project_type_id"
                                                         name="project_type_id"
                                                         th:data-first="${projectDetail.getProject_type_id()}"
                                                         th:value="${projectDetail.getProject_type_id()}">
@@ -171,7 +174,7 @@
                                                         </th:block>
                                                     </th:block>
                                                     <!-- Input project_priority_id -->
-                                                    <input type="hidden" class="form-control" id="project_priority_id"
+                                                    <input type="text" class="d-none" id="project_priority_id"
                                                         name="project_priority_id"
                                                         th:data-first="${projectDetail.getProject_priority_id()}"
                                                         th:value="${projectDetail.getProject_priority_id()}">
@@ -209,7 +212,7 @@
                                                         </th:block>
                                                     </th:block>
                                                     <!-- Input project_status_id -->
-                                                    <input type="hidden" class="form-control" id="project_status_id"
+                                                    <input type="text" class="d-none" id="project_status_id"
                                                         name="project_status_id"
                                                         th:data-first="${projectDetail.getProject_status_id()}"
                                                         th:value="${projectDetail.getProject_status_id()}">

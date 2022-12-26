@@ -16,10 +16,10 @@ $(document).ready(function () {
         alertify.warning('Hệ thống không nhận diện được hành động của bạn!');
     }
     if (updateSuccess == 'true' && message) {
-        alertify.success('Cập nhật mục "' + message + '" thành công!');
+        alertify.success('Cập nhật mục "' + message + '" thành công!').delay(1.5);
     }
     if (updateSuccess == 'false' && message) {
-        alertify.error('Cập nhật mục "' + message + '" không thành công!');
+        alertify.error('Cập nhật mục "' + message + '" không thành công!').delay(1.5);
     }
 
     var currentYear = new Date().getFullYear();
@@ -52,8 +52,9 @@ $("#phan-loai-open-modal-edit").click(function () {
 
         var dataCompare = getFormData($(this));
         if (dataCompare == $formDataOrigin) {
-            alertify.notify('Bạn chưa thay đổi dữ liệu!', 'custom', 2);
+            // alertify.notify('Bạn chưa thay đổi dữ liệu!', 'custom', 1.5);
             // alertify.notify('Bạn chưa thay đổi dữ liệu!', 'custom', 5, function () { console.log('dismissed'); });
+            alertify.warning('Bạn chưa thay đổi dữ liệu!').delay(1.5);
             return;
         }
 
@@ -70,31 +71,54 @@ $("#phan-loai-open-modal-edit").click(function () {
             function () {
                 // Cancel => Do nothing
             }
-        ).set('resizable', true).resizeTo(100, 200);
+        );
     });
 
     // Bắt sự kiện reset form
     $("#btn-tab-phan-loai-edit-reset").click(function () {
         var dataCompare = getFormData($("#form-tab-phan-loai-edit"));
         if (dataCompare == $formDataOrigin) {
-            alertify.warning('Bạn chưa thay đổi dữ liệu!');
+            alertify.warning('Bạn chưa thay đổi dữ liệu!').delay(1.5);
             return;
         }
-        $("#form-tab-phan-loai-edit")[0].reset(); // Hoàn tác dữ liệu form
-        // Hoàn tác select2 (dự án) và các button (giai đoạn, mức độ ưu tiên, trạng thái)
-        $("#project_id").select2("val", $first_project_id); // Reset dự án
 
-        var current_project_type = $('.project-step').closest('.step-class').find('div[data-status="active"]');
-        var current_project_priority = $('.project-priority').closest('.priority-class').find('div[data-status="active"]');
-        var current_project_status = $('.project-status').closest('.status-class').find('div[data-status="active"]');
-        if (current_project_type.attr('id') != $first_project_type_id) {
-            // current_project_type.removeClass("btn-primary").addClass("disabled btn-outline-secondary");
-            // current_project_type.attr('data-status', 'notActive');
-            // $('.step-class').find('div[data-status="notActive"]').removeClass("disabled btn-outline-secondary").addClass("btn-primary");
-            // $('.' + $first_project_type_id).attr('data-status', 'active');
-            // $("#project_priority_id").val($(this).attr("id"));
-        }
-        console.log(current_project_type.attr('id') + " - " + current_project_priority.attr('id') + " - " + current_project_status.attr('id'));
+
+        alertify.confirm(
+            'Xác nhận',
+            '<p class="text-center pb-2"><i class="feather icon-alert-circle text-warning h1"></i></p>'
+            + '<p class="text-center">'
+            + 'Hoàn tác dữ liệu đã thay đổi<br><span class="text-primary font-weight-bold">PHÂN LOẠI</span><br>'
+            + 'Bạn chắc chứ?'
+            + '</p>',
+            function () {
+                // Hoàn tác select2 (dự án) và các button (giai đoạn, mức độ ưu tiên, trạng thái)
+                $("#project_id").select2("val", $first_project_id); // Reset dự án
+
+                var current_project_type_id = $('.project-step').closest('.step-class').find('div[data-status="active"]').attr('id');
+                var current_project_priority = $('.project-priority').closest('.priority-class').find('div[data-status="active"]');
+                var current_project_status = $('.project-status').closest('.status-class').find('div[data-status="active"]');
+
+                // console.log(current_project_type.attr('id') + " - " + current_project_priority.attr('id') + " - " + current_project_status.attr('id'));
+                console.log("Giai đoạn sau khi chọn: " + current_project_type_id);
+                console.log("Giai đoạn trước khi chọn: " + $first_project_type_id);
+
+                if (current_project_type_id != $first_project_type_id) {
+                    // Reset project's type
+                    $('#' + current_project_type_id).removeClass("btn-primary").addClass("disabled btn-outline-secondary");
+                    $('#' + current_project_type_id).attr('data-status', 'notActive');
+                    $('#project-type-' + $first_project_type_id).removeClass("disabled btn-outline-secondary").addClass("btn-primary");
+                    $('#project-type-' + $first_project_type_id).attr('data-status', 'active');
+                }
+                $("#form-tab-phan-loai-edit")[0].reset(); // Hoàn tác dữ liệu form
+                alertify.success('Dữ liệu hoàn tác!').delay(1);
+
+                console.log("Dữ liệu form trước khi thay đổi: " + $formDataOrigin);
+                console.log("Dữ liệu form sau khi thay đổi: " + dataCompare);
+            },
+            function () {
+                // Cancel => Do nothing
+            }
+        );
     });
 
     // Ajax get data for project's selection
@@ -180,7 +204,8 @@ $("#phan-loai-open-modal-edit").click(function () {
         find_data.attr('data-status', 'notActive');
         $(this).removeClass("disabled btn-outline-secondary").addClass("btn-primary");
         $(this).attr('data-status', 'active');
-        $("#project_type_id").val($(this).attr("id"));
+        // $("#project_type_id").val($(this).attr("id"));
+        $("#project_type_id").val($(this).attr("data-input"));
     });
 
     // Form input: project_priority_id
@@ -280,16 +305,6 @@ $("#phan-loai-open-modal-edit").click(function () {
         }
         document.getElementById('form-tab-phan-loai-edit').reset();
     });
-});
-
-$("#detail-update-tab-1").submit(function (event) {
-    var firstfield_value = event.currentTarget[3].value;
-
-    var secondfield_value = event.currentTarget[1].value;
-
-    console.log(event.currentTarget);
-    console.log(firstfield_value + " - " + secondfield_value);
-    event.preventDefault();
 });
 
 function detectMessage(data) {
