@@ -1,11 +1,5 @@
-var $first_week = $("#week").attr("data-first");
-var $first_year = $("#year").attr("data-first");
-var $first_ma_hop_dong = $("#ma_hop_dong").attr("data-first");
-var $first_ma_ke_toan = $("#ma_ke_toan").attr("data-first");
-var $first_currency_unit_id = $("#currency_unit_id").attr("data-first");
 var $week = null;
 var $current_year = null;
-var $formDataOrigin = null;
 
 $(document).ready(function () {
     alertify.confirm().set({
@@ -43,11 +37,16 @@ $("#phan-loai-open-modal-edit").click(function () {
     var $first_project_type_id = $("#project_type_id").attr("data-first");
     var $first_project_priority_id = $("#project_priority_id").attr("data-first");
     var $first_project_status_id = $("#project_status_id").attr("data-first");
-
-    $formDataOrigin = getFormData($("#form-tab-phan-loai-edit"));
+    var $first_week = $("#week").attr("data-first");
+    var $first_year = $("#year").attr("data-first");
+    var $first_ma_hop_dong = $("#ma_hop_dong").attr("data-first");
+    var $first_ma_ke_toan = $("#ma_ke_toan").attr("data-first");
+    var $first_currency_unit_id = $("#currency_unit_id").attr("data-first");
+    var $formDataOrigin = getFormData($("#form-tab-phan-loai-edit"));
 
     var data_project_select_option;
 
+    // Bắt sự kiện submit form
     $("#form-tab-phan-loai-edit").submit(function (e) {
         e.preventDefault();
 
@@ -72,6 +71,30 @@ $("#phan-loai-open-modal-edit").click(function () {
                 // Cancel => Do nothing
             }
         ).set('resizable', true).resizeTo(100, 200);
+    });
+
+    // Bắt sự kiện reset form
+    $("#btn-tab-phan-loai-edit-reset").click(function () {
+        var dataCompare = getFormData($("#form-tab-phan-loai-edit"));
+        if (dataCompare == $formDataOrigin) {
+            alertify.warning('Bạn chưa thay đổi dữ liệu!');
+            return;
+        }
+        $("#form-tab-phan-loai-edit")[0].reset(); // Hoàn tác dữ liệu form
+        // Hoàn tác select2 (dự án) và các button (giai đoạn, mức độ ưu tiên, trạng thái)
+        $("#project_id").select2("val", $first_project_id); // Reset dự án
+
+        var current_project_type = $('.project-step').closest('.step-class').find('div[data-status="active"]');
+        var current_project_priority = $('.project-priority').closest('.priority-class').find('div[data-status="active"]');
+        var current_project_status = $('.project-status').closest('.status-class').find('div[data-status="active"]');
+        if (current_project_type.attr('id') != $first_project_type_id) {
+            // current_project_type.removeClass("btn-primary").addClass("disabled btn-outline-secondary");
+            // current_project_type.attr('data-status', 'notActive');
+            // $('.step-class').find('div[data-status="notActive"]').removeClass("disabled btn-outline-secondary").addClass("btn-primary");
+            // $('.' + $first_project_type_id).attr('data-status', 'active');
+            // $("#project_priority_id").val($(this).attr("id"));
+        }
+        console.log(current_project_type.attr('id') + " - " + current_project_priority.attr('id') + " - " + current_project_status.attr('id'));
     });
 
     // Ajax get data for project's selection
@@ -248,11 +271,14 @@ $("#phan-loai-open-modal-edit").click(function () {
     //     }
     // });
 
+    // Close Modal
     $(".tab-phan-loai-edit-modal-close").click(function () {
-        // if ($("#project_id").val() == $first_project_id) {
-        //     $('#tabPhanLoaiEditModal').modal('hide');
-        // }
-        $('#tabPhanLoaiEditModal').modal('hide');
+        var dataCompare = getFormData($("#form-tab-phan-loai-edit"));
+        if (dataCompare == $formDataOrigin) {
+            $('#tabPhanLoaiEditModal').modal('hide');
+            return;
+        }
+        document.getElementById('form-tab-phan-loai-edit').reset();
     });
 });
 

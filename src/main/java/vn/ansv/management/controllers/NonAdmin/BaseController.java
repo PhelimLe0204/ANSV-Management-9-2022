@@ -1,5 +1,9 @@
 package vn.ansv.management.controllers.NonAdmin;
 
+import java.time.DayOfWeek;
+import java.time.LocalDate;
+import java.time.Month;
+import java.time.temporal.TemporalAdjusters;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -29,13 +33,22 @@ public class BaseController {
     // Hàm lấy số tuần
     public int getWeekOfYear(Date date) {
 
+        int current_year = Calendar.getInstance().get(Calendar.YEAR); // Get the curent year
+
+        LocalDate dateTest = LocalDate.of(current_year, Month.FEBRUARY, 01);
+        // Xác định ngày đầu tiên trong năm
+        LocalDate firstDayOfYear = dateTest.with(TemporalAdjusters.firstDayOfYear());
+        System.out.println("--- firstDayOfYear: " + firstDayOfYear);
+        DayOfWeek dayOfWeek = firstDayOfYear.getDayOfWeek(); // Xác định ngày thứ mấy trong tuần
+        // In ra giá trị nằm trong khoảng từ 1 đến 7 tương ứng thứ 2 - Chủ nhật
+        System.out.println("--- dayOfWeek.getValue(): " + dayOfWeek.getValue());
+        System.out.println("--- First week of this year has: " + (8 - dayOfWeek.getValue()) + " days.");
+
+        /* === Determine week of year === */
         Calendar calendar = new GregorianCalendar();
         calendar.setFirstDayOfWeek(Calendar.MONDAY);
-        /*
-         * Giới hạn tuần đầu tiên có ít nhất 1 ngày (Trong trường hợp ngày đầu năm là
-         * THỨ BẢY hoặc CHỦ NHẬT -> vẫn tính là 1 tuần)
-         */
-        calendar.setMinimalDaysInFirstWeek(1);
+        // Xác định tuần đầu tiên trong năm có mấy ngày
+        calendar.setMinimalDaysInFirstWeek(8 - dayOfWeek.getValue());
         calendar.setTime(date);
         int week = calendar.get(Calendar.WEEK_OF_YEAR);
 

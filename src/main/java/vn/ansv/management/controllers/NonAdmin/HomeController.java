@@ -55,6 +55,7 @@ public class HomeController extends BaseController {
         int current_week = getWeekOfYear(trialTime); // Gọi hàm lấy số tuần => Lấy số tuần hiện tại
         int current_year = Calendar.getInstance().get(Calendar.YEAR); // Get the curent year
         // return "index";
+
         return "redirect:/dashboard?week=" + current_week + "&year=" + current_year;
     }
 
