@@ -17,8 +17,8 @@ FROM openjdk:11.0.12-jdk
 WORKDIR /app
 #ARG JAR_FILE=target/*.jar
 #COPY ${JAR_FILE} app.jar
-COPY --from=builders /app/target/spring-demo-0.0.1-SNAPSHOT.jar /app/
-ENTRYPOINT ["java","-jar", "spring-demo-0.0.1-SNAPSHOT.jar"]
+COPY --from=builders /app/target/management-0.0.1-SNAPSHOT.jar /app/
+ENTRYPOINT ["java","-jar", "management-0.0.1-SNAPSHOT.jar"]
 #EXPOSE 9800
 
 ## STAGE 2:RUN nginx###
