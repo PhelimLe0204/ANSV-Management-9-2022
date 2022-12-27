@@ -55,7 +55,7 @@ public class ProjectReport {
     @Column(name = "hinh_thuc_dau_tu") // 19
     private String hinh_thuc_dau_tu;
     @Column(name = "muc_do_kha_thi") // 20
-    private int muc_do_kha_thi;
+    private Integer muc_do_kha_thi;
     @Column(name = "phan_tich_SWOOT") // 21
     private String phan_tich_SWOOT;
     @Column(name = "pham_vi_cung_cap") // 22
@@ -125,7 +125,7 @@ public class ProjectReport {
     public ProjectReport(int id, String uid, int project_id, int project_type_id, int project_priority_id,
             int project_status_id, int currency_unit_id, int am_manager_id, int am_id, int pm_manager_id, int pm_id,
             int week, int year, String ma_hop_dong, String ma_ke_toan, String job_name, String description,
-            String tong_muc_dau_tu_du_kien, String hinh_thuc_dau_tu, int muc_do_kha_thi, String phan_tich_SWOOT,
+            String tong_muc_dau_tu_du_kien, String hinh_thuc_dau_tu, Integer muc_do_kha_thi, String phan_tich_SWOOT,
             String pham_vi_cung_cap, String tong_gia_tri_thuc_te, String so_tien_tam_ung, String ke_hoach_tam_ung,
             String so_tien_DAC, String hop_dong_DAC, String muc_tieu_DAC, String thuc_te_DAC, String so_tien_PAC,
             String hop_dong_PAC, String muc_tieu_PAC, String thuc_te_PAC, String so_tien_FAC, String hop_dong_FAC,
@@ -333,11 +333,11 @@ public class ProjectReport {
         this.hinh_thuc_dau_tu = hinh_thuc_dau_tu;
     }
 
-    public int getMuc_do_kha_thi() {
+    public Integer getMuc_do_kha_thi() {
         return this.muc_do_kha_thi;
     }
 
-    public void setMuc_do_kha_thi(int muc_do_kha_thi) {
+    public void setMuc_do_kha_thi(Integer muc_do_kha_thi) {
         this.muc_do_kha_thi = muc_do_kha_thi;
     }
 

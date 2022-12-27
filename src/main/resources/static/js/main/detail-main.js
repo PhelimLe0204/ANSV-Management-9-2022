@@ -36,6 +36,7 @@ $(document).ready(function () {
     $week = week + 1;
 });
 
+/* ===== Start: Tab 1 ===== */
 $("#phan-loai-open-modal-edit").click(function () {
     $first_project_id = $("#project_id").attr("data-first");
     $first_project_type_id = $("#project_type_id").attr("data-first");
@@ -113,7 +114,7 @@ $("#phan-loai-open-modal-edit").click(function () {
 
             $("#project_id").select2({
                 dropdownParent: $('#project-name-selection'),
-                placeholder: 'Group Category',
+                placeholder: 'Dự án chính thức...',
                 data: data_project_select_option,
                 allowClear: true,
                 selectOnClose: true,
@@ -292,6 +293,88 @@ $("#phan-loai-open-modal-edit").click(function () {
         );
     });
 });
+/* ===== End: Tab 1 ===== */
+
+
+
+/* ===== Start: Tab 2 ===== */
+$("#thanh-vien-open-modal-edit").click(function () {
+    console.log("thanh-vien-open-modal-edit");
+
+    $first_am_manager_id = $("#am_manager").attr("data-first");
+    var data_user_select_option;
+
+    // Ajax get data for project's selection
+    $.ajax({
+        url: "/api/getUserSelectOption",
+        success: function (result) {
+            data_user_select_option = result.data;
+
+            $("#am_manager").select2({
+                dropdownParent: $('#manager-am-selection'),
+                placeholder: 'Quản lý AM / Phó ban BDC...',
+                data: data_user_select_option,
+                allowClear: true,
+                selectOnClose: true,
+                templateResult: function (data, container) {
+                    var $state = $(
+                        '<div class="row">'
+                        + '<div class="col-md-2">'
+                        + '<img src="/images/user/'
+                        + (data.avatar ? data.avatar : 'image_undefined.jpg')
+                        + '" class="img-flag" style="width: 45px; height: 45px; margin-left: 10px;" />'
+                        + '</div>'
+                        + '<div class="col-md-10">'
+                        + '<span class="font-weight-bold">'
+                        + (data.fullname ? data.fullname : '. . . . .')
+                        + '</span><br>'
+                        + '<span>Mã: '
+                        + (data.employee_code ? data.employee_code : '. . . . .')
+                        + '</span>'
+                        + '</div>'
+                        + '</div>'
+                    );
+
+                    return $state;
+                },
+                templateSelection: function (data, container) {
+                    var $state = $(
+                        '<div class="row">'
+                        + '<div class="col-md-2 pb-1">'
+                        + '<img src="/images/logo/image_undefined.jpg" class="img-flag" style="width: 54px; height: 54px; margin-left: 5px; padding-top: 5px;" />'
+                        + '</div>'
+                        + '<div class="col-md-10 pt-3">'
+                        + '<span class="font-weight-bold">Mời chọn người quản lý AM...</span>'
+                        + '</div>'
+                        + '</div>'
+                    );
+
+                    if (data.id && data.fullname) {
+                        var $state = $(
+                            '<div class="row">'
+                            + '<div class="col-md-3 pb-1">'
+                            + '<img src="/images/user/'
+                            + (data.avatar ? data.avatar : 'image_undefined.jpg')
+                            + '" class="img-flag" style="width: 54px; height: 54px; margin-left: 5px; padding-top: 5px;" />'
+                            + '</div>'
+                            + '<div class="col-md-9">'
+                            + '<span class="font-weight-bold">' + data.fullname + '</span><br>'
+                            + '<span>Mã: ' + (data.employee_code ? data.employee_code : '. . . . .') + '</span>'
+                            + '</div>'
+                            + '</div>'
+                        );
+                        return $state;
+                    }
+
+                    return $state;
+                },
+            }).on("select2:selecting", (e) => { }).on("select2:unselecting", (e) => { });
+
+            $("#am_manager").select2("val", $first_am_manager_id);
+        }
+    });
+});
+/* ===== End: Tab 2 ===== */
 
 function detectMessage(data) {
     if (data == 1) {
