@@ -248,7 +248,7 @@ $("#phan-loai-open-modal-edit").click(function () {
         find_data.attr('data-status', 'notActive');
         $(this).removeClass("disabled btn-outline-secondary").addClass("btn-primary");
         $(this).attr('data-status', 'active');
-        $("#project_priority_id").val($(this).attr("id"));
+        $("#project_priority_id").val($(this).attr("data-input"));
     });
 
     // Form input: project_status_id
@@ -267,7 +267,7 @@ $("#phan-loai-open-modal-edit").click(function () {
         find_data.attr('data-status', 'notActive');
         $(this).removeClass("disabled btn-outline-" + $(this).attr("data-color")).addClass("btn-" + $(this).attr("data-color"));
         $(this).attr('data-status', 'active');
-        $("#project_status_id").val($(this).attr("id"));
+        $("#project_status_id").val($(this).attr("data-input"));
     });
 
     var htmlSelectWeek = null;
