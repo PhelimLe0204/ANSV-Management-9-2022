@@ -221,70 +221,51 @@
                                                     th:data-first="${projectDetail.getProject_status_id()}"
                                                     th:value="${projectDetail.getProject_status_id()}">
                                             </div>
-                                            <div class="col-md-12">
-                                                <hr>
-                                            </div>
                                         </div>
                                     </div>
                                     <div class="col-md-4">
-                                        <table class="table table-striped table-hover">
-                                            <tr>
-                                                <td class="font-weight-bold">Tuần</td>
-                                                <td class="pt-1 pb-1">
-                                                    <!-- Input week -->
-                                                    <select id="week" name="week" class="form-control bg-white"
-                                                        th:data-first="${projectDetail.getWeek()}">
-                                                        <option th:value="${projectDetail.getWeek()}"
-                                                            th:text="${projectDetail.getWeek()}" selected></option>
-                                                    </select>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td class="font-weight-bold">Năm</td>
-                                                <td class="pt-1 pb-1">
-                                                    <!-- Input year -->
-                                                    <select id="year" name="year" class="form-control bg-white"
-                                                        th:data-first="${projectDetail.getYear()}">
-                                                        <option th:value="${projectDetail.getYear()}"
-                                                            th:text="${projectDetail.getYear()}" selected></option>
-                                                    </select>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td class="font-weight-bold">Mã hợp đồng</td>
-                                                <td class="pt-1 pb-1">
-                                                    <!-- Input ma_hop_dong -->
-                                                    <input type="text" id="ma_hop_dong" name="ma_hop_dong"
-                                                        th:data-first="${projectDetail.getMa_hop_dong()}"
-                                                        th:value="${projectDetail.getMa_hop_dong()} ? ${projectDetail.getMa_hop_dong()} : ''"
-                                                        class="form-control bg-white" placeholder="Mã hợp đồng...">
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td class="font-weight-bold">Mã kế toán</td>
-                                                <td class="pt-1 pb-1">
-                                                    <!-- Input ma_ke_toan -->
-                                                    <input type="text" id="ma_ke_toan" name="ma_ke_toan"
-                                                        th:data-first="${projectDetail.getMa_ke_toan()}"
-                                                        th:value="${projectDetail.getMa_ke_toan()} ? ${projectDetail.getMa_ke_toan()} : ''"
-                                                        class="form-control bg-white" placeholder="Mã kế toán...">
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td class="font-weight-bold">Đơn vị tiền tệ</td>
-                                                <td class="pt-1 pb-1">
-                                                    <!-- Input currency_unit_id -->
-                                                    <select id="currency_unit_id" name="currency_unit_id"
-                                                        class="form-control bg-white"
-                                                        th:data-first="${projectDetail.getCurrency_unit_id()}">
-                                                        <option th:value="${projectDetail.getCurrency_unit_id()}"
-                                                            th:text="${projectDetail.getCurrency_unit_display()}"
-                                                            selected>
-                                                        </option>
-                                                    </select>
-                                                </td>
-                                            </tr>
-                                        </table>
+                                        <div class="row">
+                                            <div class="col-md-4 font-weight-bold pt-2">Tuần</div>
+                                            <div class="col-md-8">
+                                                <select id="week" name="week" class="form-control bg-white"
+                                                    th:data-first="${projectDetail.getWeek()}">
+                                                    <option th:value="${projectDetail.getWeek()}"
+                                                        th:text="${projectDetail.getWeek()}" selected></option>
+                                                </select>
+                                            </div>
+                                            <div class="col-md-4 font-weight-bold pt-2 mt-2">Năm</div>
+                                            <div class="col-md-8 mt-2">
+                                                <select id="year" name="year" class="form-control bg-white"
+                                                    th:data-first="${projectDetail.getYear()}">
+                                                    <option th:value="${projectDetail.getYear()}"
+                                                        th:text="${projectDetail.getYear()}" selected></option>
+                                                </select>
+                                            </div>
+                                            <div class="col-md-4 font-weight-bold pt-2 mt-2">Mã hợp đồng</div>
+                                            <div class="col-md-8 mt-2">
+                                                <input type="text" id="ma_hop_dong" name="ma_hop_dong"
+                                                    th:data-first="${projectDetail.getMa_hop_dong()}"
+                                                    th:value="${projectDetail.getMa_hop_dong()} ? ${projectDetail.getMa_hop_dong()} : ''"
+                                                    class="form-control bg-white" placeholder="Mã hợp đồng...">
+                                            </div>
+                                            <div class="col-md-4 font-weight-bold pt-2 mt-2">Mã kế toán</div>
+                                            <div class="col-md-8 mt-2">
+                                                <input type="text" id="ma_ke_toan" name="ma_ke_toan"
+                                                    th:data-first="${projectDetail.getMa_ke_toan()}"
+                                                    th:value="${projectDetail.getMa_ke_toan()} ? ${projectDetail.getMa_ke_toan()} : ''"
+                                                    class="form-control bg-white" placeholder="Mã kế toán...">
+                                            </div>
+                                            <div class="col-md-4 font-weight-bold pt-2 mt-2">Đơn vị tiền tệ</div>
+                                            <div class="col-md-8 mt-2">
+                                                <select id="currency_unit_id" name="currency_unit_id"
+                                                    class="form-control bg-white"
+                                                    th:data-first="${projectDetail.getCurrency_unit_id()}">
+                                                    <option th:value="${projectDetail.getCurrency_unit_id()}"
+                                                        th:text="${projectDetail.getCurrency_unit_display()}" selected>
+                                                    </option>
+                                                </select>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
