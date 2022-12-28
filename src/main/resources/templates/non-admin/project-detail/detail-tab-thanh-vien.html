@@ -184,98 +184,81 @@
                             id="form-tab-thanh-vien-edit" method="post">
                             <div class="modal-body">
                                 <div class="row">
-                                    <div class="col-md-6 table-responsive">
-                                        <table class="table table-striped table-hover custom-table">
-                                            <tbody>
-                                                <tr class="bg-primary">
-                                                    <td colspan="5"
-                                                        class="text-detail-thanh-vien text-white font-weight-bold pt-1 pb-1"
-                                                        align="center">
-                                                        Ban BDC
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="font-weight-bold pt-4 w-25">Quản lý AM</td>
-                                                    <!-- <td>
-                                                        <ul class="persons">
-                                                            <li>
-                                                                <a href="javascript:void(0)" data-toggle="tooltip"
-                                                                    th:title="${projectDetail.getAm_manager_name()}">
-                                                                    <img th:src="@{/images/user/avatar-8.png}"
-                                                                        alt="Person" class="img-fluid img-thanh-vien">
-                                                                </a>
-                                                            </li>
-                                                        </ul>
-                                                    </td> -->
-                                                    <td id="manager-am-selection" class="w-75 pt-1 pb-1">
-                                                        <!-- Input am_manager -->
-                                                        <select id="am_manager" name="am_manager"
-                                                            th:data-first="${projectDetail.getAm_manager_id()}">
-                                                            <option th:value="${projectDetail.getAm_manager_id()}"
-                                                                th:text="${projectDetail.getAm_manager_name()}"
-                                                                selected>
-                                                            </option>
-                                                        </select>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="font-weight-bold pt-4">AM</td>
-                                                    <td>
-                                                        <ul class="persons">
-                                                            <li>
-                                                                <a href="javascript:void(0)" data-toggle="tooltip"
-                                                                    th:title="${projectDetail.getAm_name()}">
-                                                                    <img th:src="@{/images/user/avatar-1.jpg}"
-                                                                        alt="Person" class="img-fluid img-thanh-vien">
-                                                                </a>
-                                                            </li>
-                                                        </ul>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="font-weight-bold pt-4">Tham gia</td>
-                                                    <td>
-                                                        <ul class="persons">
-                                                            <li>
-                                                                <a href="javascript:void(0)" data-toggle="tooltip"
-                                                                    th:title="${projectDetail.getAm_name()}">
-                                                                    <img th:src="@{/images/user/avatar-2.jpg}"
-                                                                        alt="Person" class="img-fluid img-thanh-vien">
-                                                                </a>
-                                                            </li>
-                                                            <li>
-                                                                <a href="javascript:void(0)" data-toggle="tooltip"
-                                                                    th:title="${projectDetail.getAm_name()}">
-                                                                    <img th:src="@{/images/user/avatar-6.jpg}"
-                                                                        alt="Person" class="img-fluid img-thanh-vien">
-                                                                </a>
-                                                            </li>
-                                                            <li>
-                                                                <a href="javascript:void(0)" data-toggle="tooltip"
-                                                                    th:title="${projectDetail.getAm_name()}">
-                                                                    <img th:src="@{/images/user/avatar-5.jpg}"
-                                                                        alt="Person" class="img-fluid img-thanh-vien">
-                                                                </a>
-                                                            </li>
-                                                            <li>
-                                                                <a href="javascript:void(0)" data-toggle="tooltip"
-                                                                    th:title="${projectDetail.getAm_name()}">
-                                                                    <img th:src="@{/images/user/avatar-4.jpg}"
-                                                                        alt="Person" class="img-fluid img-thanh-vien">
-                                                                </a>
-                                                            </li>
-                                                            <li>
-                                                                <a href="javascript:void(0)" data-toggle="tooltip"
-                                                                    th:title="${projectDetail.getAm_name()}">
-                                                                    <img th:src="@{/images/user/avatar-3.jpg}"
-                                                                        alt="Person" class="img-fluid img-thanh-vien">
-                                                                </a>
-                                                            </li>
-                                                        </ul>
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
+                                    <div class="col-md-6">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div
+                                                    class="bg-primary text-detail-thanh-vien text-white text-center font-weight-bold pt-1 pb-1">
+                                                    Ban BDC
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4 font-weight-bold pt-3 pl-4 mt-3">Quản lý AM</div>
+                                            <div id="manager-am-selection" class="col-md-8 pr-4 mt-3">
+                                                <!-- Input am_manager_id -->
+                                                <select id="am_manager" name="am_manager"
+                                                    th:data-first="${projectDetail.getAm_manager_id()}">
+                                                    <option th:value="${projectDetail.getAm_manager_id()}"
+                                                        th:text="${projectDetail.getAm_manager_name()}" selected>
+                                                    </option>
+                                                </select>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <hr>
+                                            </div>
+                                            <div class="col-md-4 font-weight-bold pt-2 pl-4">AM</div>
+                                            <div id="am-selection" class="col-md-8 pr-4">
+                                                <!-- Input am_id -->
+                                                <select id="am_id" name="am_id"
+                                                    th:data-first="${projectDetail.getAm_id()}">
+                                                    <option th:value="${projectDetail.getAm_id()}"
+                                                        th:text="${projectDetail.getAm_name()}" selected>
+                                                    </option>
+                                                </select>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <hr>
+                                            </div>
+                                            <div class="col-md-4 font-weight-bold pt-2 pl-4">Tham gia</div>
+                                            <div id="am-member-selection" class="col-md-8 pr-4">
+                                                <ul class="persons">
+                                                    <li>
+                                                        <a href="javascript:void(0)" data-toggle="tooltip"
+                                                            th:title="${projectDetail.getAm_name()}">
+                                                            <img th:src="@{/images/user/avatar-2.jpg}" alt="Person"
+                                                                class="img-fluid img-thanh-vien">
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="javascript:void(0)" data-toggle="tooltip"
+                                                            th:title="${projectDetail.getAm_name()}">
+                                                            <img th:src="@{/images/user/avatar-6.jpg}" alt="Person"
+                                                                class="img-fluid img-thanh-vien">
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="javascript:void(0)" data-toggle="tooltip"
+                                                            th:title="${projectDetail.getAm_name()}">
+                                                            <img th:src="@{/images/user/avatar-5.jpg}" alt="Person"
+                                                                class="img-fluid img-thanh-vien">
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="javascript:void(0)" data-toggle="tooltip"
+                                                            th:title="${projectDetail.getAm_name()}">
+                                                            <img th:src="@{/images/user/avatar-4.jpg}" alt="Person"
+                                                                class="img-fluid img-thanh-vien">
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="javascript:void(0)" data-toggle="tooltip"
+                                                            th:title="${projectDetail.getAm_name()}">
+                                                            <img th:src="@{/images/user/avatar-3.jpg}" alt="Person"
+                                                                class="img-fluid img-thanh-vien">
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
                                     </div>
                                     <div class="col-md-6 table-responsive">
                                         <table class="table table-striped table-hover custom-table">
